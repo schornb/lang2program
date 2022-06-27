@@ -181,7 +181,7 @@ class TablesKnowledgeGraph(object):
         elif isinstance(seconds, InfiniteSet):
             return set(chain.from_iterable(xs for (y, xs) in second_to_firsts.iteritems() if y in seconds))
         else:
-            raise NotImplementedError, '? . {} . {}'.format(relation, seconds)
+            raise NotImplementedError
 
     def reversed_join(self, relation, firsts):
         """Return the collection of all y such that for some x in firsts,
@@ -201,7 +201,7 @@ class TablesKnowledgeGraph(object):
         elif isinstance(firsts, InfiniteSet):
             return set(chain.from_iterable(ys for (x, ys) in first_to_seconds.iteritems() if x in firsts))
         else:
-            raise NotImplementedError, '{} . {} . ?'.format(firsts, relation)
+            raise NotImplementedError
 
     @property
     def all_rows(self):
@@ -226,8 +226,8 @@ class TablesKnowledgeGraph(object):
 
 if __name__ == '__main__':
     table = TablesKnowledgeGraph(sys.argv[1])
-    print table._rows
-    print table._columns
-    print table._grid
-    print table._relations
-    print table._original_strings
+    print(table._rows)
+    print(table._columns)
+    print(table._grid)
+    print(table._relations)
+    print(table._original_strings)

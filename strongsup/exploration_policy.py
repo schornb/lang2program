@@ -684,7 +684,7 @@ class BatchedReinforce(ExplorationPolicy):
     def get_intermediate_beams(self, examples, verbose=False):
         # Start with beam_size empty paths for each example
         beams = [Beam([ParsePath.empty(ex.context)
-                       for _ in xrange(self._config.beam_size)])
+                       for _ in range(self._config.beam_size)])
                 for ex in examples]
         intermediates = [[] for _ in examples]
         num_iterations = get_num_iterations(
@@ -693,7 +693,7 @@ class BatchedReinforce(ExplorationPolicy):
             iterations = verboserate(range(num_iterations),
                                      desc='Batched REINFORCE')
         else:
-            iterations = xrange(num_iterations)
+            iterations = range(num_iterations)
         for _ in iterations:
             for ex_idx, beam in enumerate(beams):
                 intermediates[ex_idx].append(beam)

@@ -1,5 +1,4 @@
 from abc import ABCMeta, abstractmethod
-from itertools import izip
 
 import numpy as np
 
@@ -69,7 +68,7 @@ class MMLCaseWeighter(CaseWeighter):
     def __call__(self, paths, example):
         path_weights = self._weight_paths(paths, example)
         case_weights = []
-        for path, path_wt in izip(paths, path_weights):
+        for path, path_wt in zip(paths, path_weights):
             case_weights.append([path_wt] * len(path))
 
         return case_weights
@@ -97,7 +96,7 @@ class REINFORCECaseWeighter(CaseWeighter):
 
         case_weights = []
         index = 0
-        for path, path_weight in izip(paths, path_weights):
+        for path, path_weight in zip(paths, path_weights):
             case_weights_for_path = []
             for case in path:
                 case_weights_for_path.append(path_weight - state_values[index])

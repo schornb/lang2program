@@ -4,6 +4,8 @@ import tensorflow as tf
 from gtd.ml.framework import Feedable
 from gtd.ml.utils import expand_dims_for_broadcast, broadcast
 
+tf.compat.v1.disable_eager_execution()
+
 
 class SequenceBatch(object):
     """Represent a batch of sequences as a Tensor."""
@@ -16,7 +18,7 @@ class SequenceBatch(object):
             values_shape_prefix = tf.slice(values_shape, [0], [2])
             max_rank = max(values.get_shape().ndims, mask.get_shape().ndims)
 
-            assert_op = tf.assert_equal(values_shape_prefix, mask_shape,
+            assert_op = tf.compat.v1.assert_equal(values_shape_prefix, mask_shape,
                                         data=[values_shape_prefix, mask_shape], summarize=max_rank,
                                         name="assert_shape_prefix")
 
@@ -95,13 +97,13 @@ class FeedSequenceBatch(Feedable, SequenceBatch):
         self._seq_length = seq_length
 
         with tf.name_scope(name):
-            values = tf.placeholder(dtype, shape=[None, None], name='values')  # (batch_size, seq_length)
-            mask = tf.placeholder(tf.float32, shape=[None, None], name='mask')  # (batch_size, seq_length)
+            values = tf.compat.v1.placeholder(dtype, shape=[None, None], name='values')  # (batch_size, seq_length)
+            mask = tf.compat.v1.placeholder(tf.float32, shape=[None, None], name='mask')  # (batch_size, seq_length)
 
         if self._seq_length is not None:
             # add static shape information
             batch_dim, _ = values.get_shape()
-            new_shape = tf.TensorShape([batch_dim, tf.Dimension(seq_length)])
+            new_shape = tf.TensorShape([batch_dim, tf.compat.v1.Dimension(seq_length)])
             values.set_shape(new_shape)
             mask.set_shape(new_shape)
 
@@ -167,7 +169,7 @@ class FeedSequenceBatch(Feedable, SequenceBatch):
 def embed(sequence_batch, embeds):
     mask = sequence_batch.mask
     embedded_values = tf.gather(embeds, sequence_batch.values)
-    embedded_values = tf.verify_tensor_all_finite(embedded_values, 'embedded_values')
+    embedded_values = tf.compat.v1.verify_tensor_all_finite(embedded_values, 'embedded_values')
 
     # set all pad embeddings to zero
     broadcasted_mask = expand_dims_for_broadcast(mask, embedded_values)

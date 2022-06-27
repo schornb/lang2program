@@ -19,7 +19,7 @@ class RLongPredicate(Predicate):
     def __new__(cls, name, original_string=None):
         if name not in cls.CACHE:
             types = cls._compute_types(name)
-            pred = super(RLongPredicate, cls).__init__(
+            pred = super(RLongPredicate, cls).__new__(
                     cls, name, original_string=original_string, types=types)
             cls.CACHE[name] = pred
         return cls.CACHE[name]

@@ -129,7 +129,7 @@ class SyncedMetadata(Metadata):
 
 def print_list(l):
     for item in l:
-        print item
+        print(item)
 
 
 def print_no_newline(s):
@@ -144,7 +144,7 @@ def set_log_level(level):
         level: can be an integer such as 30 (logging.WARN), or a string such as 'WARN'
     """
     if isinstance(level, str):
-        level = logging._levelNames[level]
+        level = logging._nameToLevel[level]
 
     logger = logging.getLogger()  # gets root logger
     logger.setLevel(level)

@@ -651,10 +651,10 @@ class ParseModel(Feedable):
                         assert_array_almost_equal(
                             fresh_feed[key], feed[key], decimal=3)
                     except Exception as e:
-                        print 'WTF', key
-                        print cases
-                        print fresh_feed[key]
-                        print feed[key]
+                        print('WTF', key)
+                        print(cases)
+                        print(fresh_feed[key])
+                        print(feed[key])
                         raise e
                         # assert_array_collections_equal(fresh_feed, feed, decimal=4)
 

@@ -235,7 +235,7 @@ class TopLevelTracker(Tracker):
             # Key not available to load yet
             if key not in available_keys:
                 warn("No results found for {}".format(exp_path))
-                print "Perhaps your job has died?"
+                print("Perhaps your job has died?")
                 return False, None, None
             if key in available_keys:
                 values.append([scalar.value for scalar in acc.Scalars(key)])
@@ -356,9 +356,9 @@ class JobMetadata(object):
         self.__init__(dataset, experiment_type, seed, path, last_accessed)
 
     def __str__(self):
-        return "JobMetadata({}, {}, {}, {}, {})".format(
-                self.experiment_type, self.dataset, self.seed, self.path, self.last_accessed)
+        return("JobMetadata({}, {}, {}, {}, {})".format(
+                self.experiment_type, self.dataset, self.seed, self.path, self.last_accessed))
     __repr__ = __str__
 
 def warn(msg):
-    print "=" * 10 + "WARNING: " + msg + "=" * 10
+    print("=" * 10 + "WARNING: " + msg + "=" * 10)

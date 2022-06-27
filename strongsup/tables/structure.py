@@ -175,7 +175,7 @@ class InfiniteSet(ContainerABC):
         return self & stuff
 
 
-THINGS = (basestring, float, Date)
+THINGS = ("", float, Date)
 COMPARABLES = (float, Date)
 COMPUTABLES = (float,)
 UNARIES = (set, InfiniteSet)

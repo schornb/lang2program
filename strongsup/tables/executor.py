@@ -172,7 +172,7 @@ class TablesPostfixExecutor(Executor):
             Exception if the formula is malformed.
         """
         if self.debug:
-            print 'Executing: {} (old deno: {})'.format(y_toks, old_denotation)
+            print('Executing: {} (old deno: {})'.format(y_toks, old_denotation))
         if old_denotation:
             stack = TablesDenotation(old_denotation)  # copy
             assert stack.utterance_idx == old_denotation.utterance_idx
@@ -185,7 +185,7 @@ class TablesPostfixExecutor(Executor):
             else:
                 self.apply(predicate.name, stack)
             if self.debug:
-                print predicate, stack
+                print(predicate, stack)
         return stack
 
     def execute_predicate(self, predicate, old_denotation=None):
@@ -439,6 +439,6 @@ class TablesPostfixExecutor(Executor):
 def add_decorated_methods(profiler):
     for k, v in TablesPostfixExecutor.__dict__.items():
         if hasattr(v, 'original_fn'):
-            print 'Adding function {} to profiler'.format(k)
+            print('Adding function {} to profiler'.format(k))
             profiler.add_function(v)
             profiler.add_function(v.original_fn)

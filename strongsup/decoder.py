@@ -168,7 +168,7 @@ class Decoder(object):
                                                                   caching=False)
         # Group the scores by paths
         grouped_attentions, grouped_subscores = [], []
-        for i in xrange(len(paths)):
+        for i in range(len(paths)):
             grouped_attentions.append(attentions[cumul[i]:cumul[i+1]])
             grouped_subscores.append(subscores[cumul[i]:cumul[i+1]])
         return grouped_attentions, grouped_subscores

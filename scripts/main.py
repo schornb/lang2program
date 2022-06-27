@@ -31,14 +31,14 @@ args = arg_parser.parse_args()
 seed = args.random_seed
 random.seed(seed)
 np.random.seed(seed)
-tf.set_random_seed(seed)
+tf.random.set_seed(seed)
 
 # import keras AFTER random seeds are set
 from keras import backend as K
 
-sess_config = tf.ConfigProto()
+sess_config = tf.compat.v1.ConfigProto()
 sess_config.gpu_options.allow_growth = True
-sess = tf.InteractiveSession(config=sess_config)
+sess = tf.compat.v1.InteractiveSession(config=sess_config)
 K.set_session(sess)
 
 
@@ -91,7 +91,7 @@ with save_stdout(exp.workspace.root):
     try:
         config = exp.config
         if exp_mode == 'train':
-            print '\n===== TRAIN MODE ====='
+            print('\n===== TRAIN MODE =====')
             if config.train_mode == 'semi-supervised':
                 exp.train()
             elif config.train_mode == 'supervised':
@@ -100,7 +100,7 @@ with save_stdout(exp.workspace.root):
                 raise ValueError('Invalid train mode: {}'.format(config.train_mode))
 
         elif exp_mode == 'eval':
-            print '\n===== EVALUATION MODE ====='
+            print('\n===== EVALUATION MODE =====')
             exp.big_evaluate(eval_samples)
         else:
             raise ValueError('Invalid experiment mode: {}'.format(exp_mode))

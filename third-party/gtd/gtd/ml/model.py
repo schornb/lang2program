@@ -39,7 +39,7 @@ class TokenEmbedder(Embedder):
         vocab = simple_embeddings.vocab
         vocab_size = len(vocab)
         embed_dim = simple_embeddings.embed_dim
-        embeds = tf.get_variable(var_name, shape=[vocab_size, embed_dim],
+        embeds = tf.compat.v1.get_variable(var_name, shape=[vocab_size, embed_dim],
                                  initializer=tf.constant_initializer(simple_embeddings.array), trainable=trainable)
 
         self._embeds = embeds

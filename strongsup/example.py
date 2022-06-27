@@ -1,5 +1,4 @@
 from collections import Sequence
-from itertools import izip
 import sys
 
 from gtd.io import JSONPicklable
@@ -330,7 +329,7 @@ class DelexicalizedContext(BaseContext):
         placeholder_positions = {}
         old_to_new_indices = []
         last_replacement = None
-        for token, replacement in izip(utt, replacements):
+        for token, replacement in zip(utt, replacements):
             if not replacement:
                 tokens.append(token)
             elif replacement != last_replacement:

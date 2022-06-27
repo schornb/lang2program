@@ -48,10 +48,12 @@ class DataDirectory:
     absolute path of the directory containing data before using this class.
     """
     # Set location of local data directory from environment variable
-    env_var = 'STRONGSUP_DIR'
+    env_var = 'HOME'
+    print(os.environ)
     if env_var not in os.environ:
         assert False, env_var + ' environmental variable must be set.'
     root = os.environ[env_var]
+    root += "/research/robotics/human-to-robotics/lang2program/data"
 
     # Base directory helper
     _base_dir = Directory(root)

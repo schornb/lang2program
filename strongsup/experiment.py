@@ -1,6 +1,5 @@
 import os
 import random
-from itertools import izip
 
 import numpy as np
 import tensorflow as tf
@@ -71,13 +70,13 @@ class Experiment(gtd.ml.experiment.TFExperiment):
         # Reload weights if they exist. Otherwise, initialize weights.
         try:
             self.saver.restore()
-            print 'Successfully reloaded the weights'
+            print('Successfully reloaded the weights')
         except IOError:
             # NOTE: use this instead of tf.initialize_all_variables()!
             # That op will overwrite Keras initializations.
             sess = tf.get_default_session()
             guarantee_initialized_variables(sess)
-            print 'Weights initialized'
+            print('Weights initialized')
 
     @property
     def train_parse_model(self):
@@ -274,7 +273,7 @@ class Experiment(gtd.ml.experiment.TFExperiment):
                     return
 
     # def supervised_train(self):
-    #     train_parse_model = self.train_parse_model
+    #     train_parse_model = self.train_parse_modelf
     #     eval_time = Pulse(self.config.timing.eval)
     #     supervised_eval_time = Pulse(self.config.timing.supervised_eval)
     #     cases = examples_to_supervised_cases(self.train_examples)
@@ -325,7 +324,7 @@ class Experiment(gtd.ml.experiment.TFExperiment):
         report_loss(case_sample(self.valid_examples), 'loss_val')
 
     def evaluate(self, step):
-        print 'Evaluate at step {}'.format(step)
+        print('Evaluate at step {}'.format(step))
         num_examples = self.config.num_evaluate_examples
         with random_seed(0):
             train_sample = sample_if_large(self.train_examples, num_examples,
@@ -353,7 +352,7 @@ class Experiment(gtd.ml.experiment.TFExperiment):
             # collect value function examples
             value_function = self.decoder._value_function
             vf_examples = []
-            for example, beam in izip(ex_batch, beams):
+            for example, beam in zip(ex_batch, beams):
                 vf_examples.extend(ValueFunctionExample.examples_from_paths(beam, example))
 
             # compute ValueFunction metrics
